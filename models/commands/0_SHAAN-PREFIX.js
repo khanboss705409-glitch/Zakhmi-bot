@@ -1,107 +1,56 @@
 module.exports.config = {
   name: "prefix",
-  version: "2.0.0",
+  version: "3.0.0",
   hasPermssion: 0,
-  credits: "SHAAN BABU",
-  description: "Show bot prefix with date & time",
+  credits: "ZAKHMI SAYAR",
+  description: "Stylish prefix",
   commandCategory: "system",
   usages: "prefix",
   cooldowns: 5
 };
 
+function getMsg(prefix) {
+  const now = new Date();
+  const time = now.toLocaleTimeString("en-IN", { timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true });
+  const date = now.toLocaleDateString("en-IN", { timeZone: "Asia/Kolkata", day: "2-digit", month: "long", year: "numeric" });
+  const day = now.toLocaleDateString("en-IN", { timeZone: "Asia/Kolkata", weekday: "long" });
+  return `
+╭────── • ──────────╮
+   ✦  𝐙𝐀𝐊𝐇𝐌𝐈 𝐁𝐎𝐓  ✦
+╰────── • ──────────╯
+┏━━━━━━━━━━━━━━━━━┓
+┃  🎯 𝐏𝐑𝐄𝐅𝐈𝐗 𝐈𝐍𝐅𝐎 🎯
+┗━━━━━━━━━━━━━━━━━┛
+ 「💣」𝐏𝐑𝐄𝐅𝐈𝐗  ➟  ${prefix}
+ 「⏰」𝐓𝐈𝐌𝐄    ➟  ${time}
+ 「📅」𝐃𝐀𝐓𝐄    ➟  ${date}
+ 「🌸」𝐃𝐀𝐘     ➟  ${day}
+┏━━━━━━━━━━━━━━━━━┓
+┃  👑 𝐎𝐖𝐍𝐄𝐑 𝐈𝐍𝐅𝐎 👑
+┗━━━━━━━━━━━━━━━━━┛
+  ★᭄ 𝗡𝗮𝗺𝗲 : 𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹
+  ★᭄ 𝗙𝗕 : https://www.facebook.com/profile.php?id=61595007082014
+ ──═━═── 𝐀𝐓𝐓𝐈𝐓𝐔𝐃𝐄 ──═━═──
+   " Hum Zakhmi Sayar Hai,
+     Khel Mohabbat Ka Nahi,
+     Attitude Ka Khelte Hai " 😎🔥
+╰── ⋅ ⋅ ── ♡ ── ⋅ ⋅ ──╯
+`;
+}
+
 module.exports.handleEvent = async ({ event, api }) => {
   const { threadID, messageID, body } = event;
-
   if (!body) return;
-
-  const trigger = ["prefix", "mprefix", "mpre", "bot prefix", "prefix kya hai"];
-  if (!trigger.includes(body.toLowerCase())) return;
-
-  const threadSetting =
-    global.data.threadData.get(parseInt(threadID)) || {};
+  if (!["prefix", "mprefix", "mpre", "bot prefix", "prefix kya hai"].includes(body.toLowerCase())) return;
+  const threadSetting = global.data.threadData.get(parseInt(threadID)) || {};
   const prefix = threadSetting.PREFIX || global.config.PREFIX;
-
-  // 🇵🇰 PAKISTAN DATE & TIME
-  const now = new Date();
-
-  const time = now.toLocaleTimeString("en-IN", {
-    timeZone: "Asia/Karachi",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false
-  });
-
-  const date = now.toLocaleDateString("en-IN", {
-    timeZone: "Asia/Karachi",
-    day: "2-digit",
-    month: "long",
-    year: "numeric"
-  });
-
-  const day = now.toLocaleDateString("en-IN", {
-    timeZone: "Asia/Karachi",
-    weekday: "long"
-  });
-
-  const msg = `
-▰▰▰▰▰ ★ • ✧ • ★ ▰▰▰▰▰
-   🎉 ✧ PREFIX ✧ ✅
-✦••┈┈┈┈┈┈┈ ✧ ┈┈┈┈┈┈┈••✦
-
-✰ PREFIX ➪ ${prefix}
-✰ TIME ➪ ${time}
-✰ DATE ➪ ${date}
-✰ DAY ➪ ${day}
-
-༺══─────────══༻
-MADE BY ❤️‍🔥 SHAAN-KHAN-K 
-`;
-
-  return api.sendMessage(msg, threadID, messageID);
+  const fs = require("fs-extra");
+  return api.sendMessage({ body: getMsg(prefix), attachment: fs.createReadStream(__dirname + `/cache/ZAKHMI.jpg`) }, threadID, messageID);
 };
 
 module.exports.run = async ({ event, api }) => {
-  const threadSetting =
-    global.data.threadData.get(parseInt(event.threadID)) || {};
+  const threadSetting = global.data.threadData.get(parseInt(event.threadID)) || {};
   const prefix = threadSetting.PREFIX || global.config.PREFIX;
-
-  //🇵🇰 PAKISTAN DATE & TIME
-  const now = new Date();
-
-  const time = now.toLocaleTimeString("en-IN", {
-    timeZone: "Asia/Karachi",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false
-  });
-
-  const date = now.toLocaleDateString("en-IN", {
-    timeZone: "Asia/Karachi",
-    day: "2-digit",
-    month: "long",
-    year: "numeric"
-  });
-
-  const day = now.toLocaleDateString("en-IN", {
-    timeZone: "Asia/Karachi",
-    weekday: "long"
-  });
-
-  const msg = `
-▰▰▰▰▰ ★ • ✧ • ★ ▰▰▰▰▰
-   🎉 ✧ PREFIX ✧ ✅
-✦••┈┈┈┈┈┈┈ ✧ ┈┈┈┈┈┈┈••✦
-
-✰ PREFIX ➪ ${prefix}
-✰ TIME ➪ ${time}
-✰ DATE ➪ ${date}
-✰ DAY ➪ ${day}
-
-༺══─────────══༻
-MADE BY ❤️‍🔥 SHAAN-KHAN-K 
-`;
-
-  return api.sendMessage(msg, event.threadID);
+  const fs = require("fs-extra");
+  return api.sendMessage({ body: getMsg(prefix), attachment: fs.createReadStream(__dirname + `/cache/ZAKHMI.jpg`) }, event.threadID);
 };
