@@ -1,27 +1,77 @@
+///WARNING THIS BOT IS MADE BY SHAAN BABU //////@shaan-babu3608//////////
 module.exports.config = {
-  name: "sayeri",
-  version: "1.0.0",
-  hasPermssion: 0,
-  credits: "SHAAN",
-  description: "THIS BOT IS MADE BY SHAAN",
-  commandCategory: "ARYAN-STATUS",
-  usages: "SAYERI",
-  cooldowns: 2,
-  dependencies: {
-    "request":"",
-    "fs-extra":"",
-    "axios":""
-  }
+    name: "sis",
+    version: "7.3.1",
+    hasPermssion: 0,
+    credits: "SHAAN BABU",///@shaan-babu3608
+    description: "THIS BOT IS ME SHAAN BABU",
+    usePrefix: true,
+    commandCategory: "MENTION PARTNER",
+    usages: "PAIR-2",
+    cooldowns: 5, 
+    dependencies: {
+        "axios": "",
+        "fs-extra": "",
+        "path": "",
+        "jimp": ""
+    }
+};   
+      /////////////IMRAN BABU////////////
+module.exports.onLoad = async() => {
+    const { resolve } = global.nodemodule["path"];
+    const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
+    const { downloadFile } = global.utils;
+    const dirMaterial = __dirname + `/cache/canvas/`;
+    const path = resolve(__dirname, 'cache/canvas', 'arb.png');
+    if (!existsSync(dirMaterial)) mkdirSync(dirMaterial, { recursive: true });
+    if (!existsSync(path)) await downloadFile("https://i.imgur.com/3vfcL97.jpeg", path); 
+}
 
-};
+async function makeImage({ one, two }) {
+    const fs = global.nodemodule["fs-extra"];
+    const path = global.nodemodule["path"];
+    const axios = global.nodemodule["axios"]; 
+    const jimp = global.nodemodule["jimp"];
+    const __root = path.resolve(__dirname, "cache", "canvas");
 
-module.exports.run = async({api,event,args,Users,Threads,Currencies}) => {
-const axios = global.nodemodule["axios"];
-const request = global.nodemodule["request"];
-const fs = global.nodemodule["fs-extra"];
-    var link = [
-"https://i.imgur.com/L2N4gnh.jpeg","https://i.imgur.com/Jj4x2rA.jpeg","https://i.imgur.com/Is7HJDE.jpeg","https://i.imgur.com/oJUw7Gh.jpeg","https://i.imgur.com/3t5bKFL.jpeg","https://i.imgur.com/tlTObOV.jpeg","https://i.imgur.com/rkVzppE.jpeg","https://i.imgur.com/iazM2aN.jpeg","https://i.imgur.com/niBKTQJ.jpeg","https://i.imgur.com/aSz3SnJ.jpeg","https://i.imgur.com/QcuQ1gN.jpeg","https://i.imgur.com/l5RAB2M.jpeg","https://i.imgur.com/KNoNVSQ.jpeg","https://i.imgur.com/uiFmAwl.jpeg","https://i.imgur.com/e9BAJri.jpeg","https://i.imgur.com/lzf6qSB.jpeg","https://i.imgur.com/0X2u7q3.jpeg","https://i.imgur.com/wOkGVPi.jpeg","https://i.imgur.com/INHCGdv.jpeg","https://i.imgur.com/3SV8uWi.jpeg","https://i.imgur.com/JIalSDN.jpeg","https://i.imgur.com/suSnQQp.jpeg","https://i.imgur.com/hCW1AS1.jpeg","https://i.imgur.com/eaWcT2F.jpeg","https://i.imgur.com/qfZ4oGY.jpeg","https://i.imgur.com/MJQBAj2.jpeg","https://i.imgur.com/lVGr67a.jpeg","https://i.imgur.com/8tE3jBD.jpeg","https://i.imgur.com/W7Ny2aq.jpeg","https://i.imgur.com/pweWNvD.jpeg","https://i.imgur.com/x9oVd1N.jpeg","https://i.imgur.com/ZqURfat.jpeg","https://i.imgur.com/AHhibm4.jpeg","https://i.imgur.com/t0P4bmR.jpeg"
-     ];
-     var callback = () => api.sendMessage({body:``,attachment: fs.createReadStream(__dirname + "/cache/1.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.jpg"));  
-      return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname+"/cache/1.jpg")).on("close",() => callback());
-   };
+    let batgiam_img = await jimp.read(__root + "/arb.png");
+    let pathImg = __root + `/shaan_${one}_${two}.png`;
+    let avatarOne = __root + `/avt_${one}.png`;
+    let avatarTwo = __root + `/avt_${two}.png`;
+
+    let getAvatarOne = (await axios.get(`https://graph.facebook.com/${one}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, { responseType: 'arraybuffer' })).data;
+    fs.writeFileSync(avatarOne, Buffer.from(getAvatarOne, 'utf-8'));
+
+    let getAvatarTwo = (await axios.get(`https://graph.facebook.com/${two}/picture?width=512&height=512&access_token=6628568379%7Cc1e620fa708a1d5696fb991c1bde5662`, { responseType: 'arraybuffer' })).data;
+    fs.writeFileSync(avatarTwo, Buffer.from(getAvatarTwo, 'utf-8'));
+
+    let circleOne = await jimp.read(await circle(avatarOne));
+    let circleTwo = await jimp.read(await circle(avatarTwo));
+    batgiam_img.composite(circleOne.resize(200, 200), 77, 152).composite(circleTwo.resize(200, 200), 440, 155);
+
+    let raw = await batgiam_img.getBufferAsync("image/png");
+
+    fs.writeFileSync(pathImg, raw);
+    fs.unlinkSync(avatarOne);
+    fs.unlinkSync(avatarTwo);
+
+    return pathImg;
+}
+
+async function circle(image) {
+    const jimp = require("jimp");
+    image = await jimp.read(image);
+    image.circle();
+    return await image.getBufferAsync("image/png");
+}
+
+module.exports.run = async function ({ event, api, args }) {    
+    const fs = global.nodemodule["fs-extra"];
+    const { threadID, messageID, senderID } = event;
+    const mention = Object.keys(event.mentions);
+    if (!mention[0]) return api.sendMessage("Please mention 1 person.", threadID, messageID);
+    else {
+        const one = senderID, two = mention[0];
+        return makeImage({ one, two }).then(path => api.sendMessage({ body: "❥︎|===『  ♥️ IMRAN BABU ♥️  』===|☻︎", attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
+    }
+}
