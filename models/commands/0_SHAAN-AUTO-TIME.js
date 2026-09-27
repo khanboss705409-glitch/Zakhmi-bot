@@ -1,111 +1,56 @@
 module.exports.config = {
 name: 'autosent',
-version: '10.02',
+version: '11.0',
 hasPermssion: 0,
-credits: 'SHAAN-KHAN',
-description: 'Set Karne Ke Bad Automatically Msg Send Karega',
+credits: 'ZAKHMI SAYAR',
+description: 'India Time - Hindi Shayari - ZAKHMI SAYAR',
 commandCategory: 'group messenger',
 usages: '[]',
 cooldowns: 3
 };
-const nam = [{
-timer: '12:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 10:00 P𝐌 ⏳            کیا میں نے کبھی سوچا تھا کہ خوابوں کا پیچھا کرتے ہوئے میں خود کو کھو دوں گا؟\n مگر یہ کیا، جب میں نے خود کو پایا تو سارے خواب کہیں کھو گئے۔                 ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '1:00:00 AM',
-message: ['──── •💜• ────     𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 11:00 𝗔𝐌 ⏳           دلوں میں تنہائی ہے,\n پھر بھی امیدیں ہمیشہ دل کو زندہ رکھتی ہیں۔\n جو سیدھی راہ پر چلے گا وہ ضرور کچھ روشنی پائے گا۔              ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '2:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 12:00 A𝐌 ⏳             جب ہم گرتے ہیں تو دنیا کی نظروں میں ہماری قدر بڑھ جاتی ہے۔,\nکیونکہ یہ ہمیں دوبارہ کھڑے ہونے کی طاقت دیتا ہے۔          ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '3:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 1:00 A𝐌 ⏳             ہم جو چاہتے ہیں وہ آسانی سے نہیں ملتا\n لیکن جب ہم محنت اور صبر حاصل کرتے ہیں تو یہ سب سے قیمتی ہوتا ہے۔ہم جو چاہتے ہیں وہ آسانی سے نہیں ملتا\n لیکن جب ہم محنت اور صبر حاصل کرتے ہیں تو یہ سب سے قیمتی ہوتا ہے۔              ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '4:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 2:00 A𝐌 ⏳              تنہائی میں خود کو کبھی تنہا مت سمجھو\n کیونکہ دنیا کا سب سے بڑا دوست آپ کا خود اعتمادی ہے۔          ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '5:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 3:00 A𝐌 ⏳ ہر شخص کے دل میں ایک کہانی ہے\n جسے کبھی کوئی نہیں جانتا،\nکیونکہ وہ کہانی صرف اس شخص کے دل میں رہتی ہے۔\n.      ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '6:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 4:00 𝗔𝐌 ⏳            ہر موڑ پر نیا رستہ ڈھونڈتا ہوں\n کیونکہ میں ان راستوں پر نہیں چلتا جو پہلے سے طے شدہ ہوں۔             ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '7:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 5:00 A𝐌 ⏳             خوش رہنا اور مسکرانا سب سے بڑی طاقت ہے\n کیونکہ یہ درد کو کم کرتا ہے اور زندگی کو آسان بناتا ہے۔🕊️                 ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '8:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 6:00 A𝐌 ⏳            زندگی میں مشکلیں آتی ہیں، لیکن اگر ہم ان کے ساتھ ہنستے ہوئے چلیں تو وہ ہمیں کبھی ہارنے نہیں دیتے۔                  ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '9:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 7:00 A𝐌 ⏳            اچھے برے وقت کا ملنا کسی کے بس میں نہیں ہوتا\n لیکن جو اسے قبول کرتا ہے وہی حقیقی فاتح ہے۔                ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '10:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 8:00 A𝐌 ⏳           زندگی کی سب سے اچھی بات یہ ہے کہ وقت جو بھی گزر جائے\n وہ کبھی واپس نہیں آتا، اس لیے جتنا ہو سکے جیو۔",──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '11:00:00 AM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 9:00 A𝐌 ⏳            لوگ اکثر مجھے خوش رہنے کو کہتے ہیں۔,\n لیکن ان کی سمجھ میں نہیں آتا کہ مسکراہٹ کے پیچھے کتنی کہانیاں چھپی ہیں۔               ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '12:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 10:00 A𝐌 ⏳            ہمیں چھوڑنے والے،\n ہم ان کے بغیر بھی جی سکتے ہیں\n لیکن جو دل سے جڑے رہتے ہیں وہ کبھی نہیں جاتے۔               ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '1:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 11:00 𝐏𝐌 ⏳            کبھی کبھی ہماری خاموشی ہماری سب سے بڑی آواز بن جاتی ہے\n کیونکہ اس آواز میں سچائی اور درد ہے۔            ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '2:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 12:00 𝐏𝐌 ⏳            زندگی کی راہیں آسان نہیں\n ہر کسی کا دل کبھی نہ کبھی ٹوٹتا ہے\n لیکن جو دل ٹوٹا اور جڑا ہو وہ سب سے مضبوط ہوتا ہے۔                 ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '3:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 1:00 𝐏𝐌 ⏳            امید کے بارے میں کیا، یہ ہر روز ٹوٹتا ہے اور پھر سے بڑھتا ہے۔\n بس اسے پکڑو یہاں تک کہ جب وہ گرے، کیونکہ یہ تمہاری طاقت ہے۔                   ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '4:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 2:00 𝐏𝐌 ⏳                 انسان اپنے حالات کا پابند نہیں ہوتا\n آپ کی نیت سے بڑا ہے۔\n جو کبھی ہار نہیں مانتا وہی سب سے زیادہ جیتتا ہے۔                     ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '5:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 3:00 𝐏𝐌 ⏳            جو اپنے خواب پورے دل سے جیتا ہے\n وہ اپنی زندگی میں کبھی ہار نہیں سکتا۔\n شکست صرف وہی لوگ قبول کرتے ہیں جو اپنی امیدیں چھوڑ دیتے ہیں۔                       ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '6:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 4:00 𝐏𝐌 ⏳                 زندگی بہت مختصر ہے،\n لیکن بعض اوقات ہم اپنے خوابوں کو پورا کرنے میں اتنی دیر لگا دیتے ہیں کہ ہم جینے کا صحیح طریقہ بھول جاتے ہیں۔              ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '7:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 5:00 𝐏𝐌 ⏳             ہمیشہ یاد رکھنا،\n دکھ اور خوشی دونوں وقت کی طرح ہیں۔\n جب ایک آتا ہے تو دوسرا بھی جلد آتا ہے۔\n اس لیے کبھی تنہا محسوس نہ کریں۔                ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '8:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 6:00 𝐏𝐌 ⏳             جو گزر گیا اسے بھول جاؤ\n ابھی کیا ہے اس پر توجہ دیں۔\n آج آپ کی محنت کی وجہ سے،\n وہ آپ کے کل کا چہرہ بنائے گی۔               ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '9:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 7:00 𝐏𝐌 ⏳              انسان خود کو اسی دن سمجھتا ہے\n جس دن وہ دوسروں کے بارے میں سوچنا چھوڑ دیتا ہے۔\n کیونکہ دوسروں کے بارے میں سوچتے ہوئے ہم اپنے آپ کو کھو دیتے ہیں۔🕊️                                ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '10:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 8:00 𝐏𝐌 ⏳                  زندگی کی سب سے بڑی سزا\n کسی کو دل سے پیار کرنے کے بعد اسے کھونا پڑتا ہے۔\n لیکن یہ وہ وقت ہوتا ہے جب انسان سب سے مضبوط ہوتا ہے۔                 ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-},
-{
-timer: '11:00:00 PM',
-message: ['──── •💜• ────                𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐡𝐚𝐢 9:00 P𝐌 ⏳              زندگی میں ہمیشہ خوش رہنے کی کوشش کرو\n کیونکہ جب آپ خوش ہوتے ہیں تو دنیا آپ کے ساتھ ہوتی ہے۔\n اور جب آپ اداس ہوتے ہیں تو دنیا بھی چلی جاتی ہے۔                     ──── •💜• ────»»𝐎𝐖𝐍𝐄𝐑««★𝑺𝑯𝑨𝑨𝑵 𝑲𝑯𝑨𝑵★']
-}];
-module.exports.onLoad = o => setInterval(() => {
-const r = a => a[Math.floor(Math.random()*a.length)];
-if (á = nam.find(i => i.timer == new Date(Date.now()+25200000).toLocaleString().split(/,/).pop().trim())) global.data.allThreadID.forEach(i => o.api.sendMessage(r(á.message), i));
-}, 1000);
+
+const nam = [
+{ timer: '12:00:00 AM', message: ['──── •💜• ────\n🕛 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 12:00 AM ⏳\n📅 {date}\n\nRaat ke 12 baje khwab sajte hain,\nDil me tere hi khayal bajte hain,\nNeend bhi ab ruth gayi hai humse,\nBas teri yaadon ke deep jalte hain.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '1:00:00 AM', message: ['──── •💜• ────\n🕐 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 1:00 AM ⏳\n📅 {date}\n\nRaat gehri hai, tanha dil hai,\nTeri kami ka ehsaas kal bhi tha aaj bhi hai,\nChaand bhi thak ke so gaya hai,\nPar dil tujhe hi yaad karta hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '2:00:00 AM', message: ['──── •💜• ────\n🕑 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 2:00 AM ⏳\n📅 {date}\n\n2 baje raat ke, sab so gaye,\nHum teri yaadon me kho gaye,\nDil ke zakhm gehre hote gaye,\nPar hum to Zakhmi hi ho gaye.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '3:00:00 AM', message: ['──── •💜• ────\n🕒 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 3:00 AM ⏳\n📅 {date}\n\nNa raat kat rahi hai, na din nikal raha,\nDil tere bina kahin lag nahi raha,\nZakhmi dil ka haal kya bataye,\nJo tujhe kabhi bhula nahi raha.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '4:00:00 AM', message: ['──── •💜• ────\n🕓 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 4:00 AM ⏳\n📅 {date}\n\nSubah hone ko hai, par neend nahi aati,\nTeri yaadon ki mehfil ab bhi sajti hai,\nDil kehta hai ek baar tu laut aa,\nZindagi phir se hasne lagti hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '5:00:00 AM', message: ['──── •💜• ────\n🕔 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 5:00 AM ⏳\n📅 {date}\n\nSubah ke 5 baje, nayi umeed jagi hai,\nRaat ke gham ko humne peeche chhoda hai,\nZakhmi dil bhi ab muskurayega,\nNayi subah ne ye wada kiya hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '6:00:00 AM', message: ['──── •💜• ────\n🕕 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 6:00 AM ⏳\n📅 {date}\n\nGood Morning, utth jao yaaron,\nChai garam hai, dil bhi garam hai,\nZindagi ek nayi shuruwat hai,\nZakhmi Sayar ka salaam hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '7:00:00 AM', message: ['──── •💜• ────\n🕖 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 7:00 AM ⏳\n📅 {date}\n\nSubah subah tera naam lete hain,\nDil se dua me tujhe yaad karte hain,\nTu khush rahe yahi dua hai,\nHum to bas yahi fariyaad karte hain.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '8:00:00 AM', message: ['──── •💜• ────\n🕗 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 8:00 AM ⏳\n📅 {date}\n\nZindagi me mushkile aati hain,\nPar has ke jeene wale kabhi harte nahi,\nJo dil se mehnat karte hain,\nKismat unka saath chodte nahi.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '9:00:00 AM', message: ['──── •💜• ────\n🕘 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 9:00 AM ⏳\n📅 {date}\n\nKaam ka time hai, lag jao sab,\nSapne dekhne se nahi, mehnat se bante hain khwab,\nZakhmi dil bhi kehta hai,\nAaj kuch kar dikhao yaar.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '10:00:00 AM', message: ['──── •💜• ────\n🕙 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 10:00 AM ⏳\n📅 {date}\n\nDin chadh gaya, roshni chha gayi,\nDil ki duniya phir se mehka gayi,\nTeri yaad ka ek paigam aaya,\nSubah meri aur bhi haseen ho gayi.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '11:00:00 AM', message: ['──── •💜• ────\n🕚 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 11:00 AM ⏳\n📅 {date}\n\nHasna sikho, muskurana sikho,\nDard ko bhi gale lagana sikho,\nZindagi me gham to aate jate hain,\nKhushi me jeena sikho.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '12:00:00 PM', message: ['──── •💜• ────\n🕛 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 12:00 PM ⏳\n📅 {date}\n\nDopahar ho gayi, khana kha lo yaar,\nKaam thoda side me rakho,\nZakhmi Sayar ka message aaya hai,\nDil ko thoda sukoon do.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '1:00:00 PM', message: ['──── •💜• ────\n🕐 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 1:00 PM ⏳\n📅 {date}\n\nDil ka dard zubaan par aata nahi,\nHar koi dard samajh pata nahi,\nJo sach me apna hota hai,\nWo kabhi rulaata nahi.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '2:00:00 PM', message: ['──── •💜• ────\n🕑 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 2:00 PM ⏳\n📅 {date}\n\nZindagi ki raahein aasan nahi,\nHar dil kabhi na kabhi tootta hai,\nPar jo toota dil jod le,\nWahi sabse majboot hota hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '3:00:00 PM', message: ['──── •💜• ────\n🕒 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 3:00 PM ⏳\n📅 {date}\n\nUmeed roz tootti hai, roz banti hai,\nBas usko pakde raho, girne mat do,\nKyunki umeed hi to zindagi hai,\nIsi se to duniya chalti hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '4:00:00 PM', message: ['──── •💜• ────\n🕓 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 4:00 PM ⏳\n📅 {date}\n\nShaam dhal rahi hai, chai ka time hai,\nThakan ko thoda aaram do,\nZakhmi Sayar ki shayari suno,\nDil ko thoda pyaar do.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '5:00:00 PM', message: ['──── •💜• ────\n🕔 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 5:00 PM ⏳\n📅 {date}\n\nJo apne sapno ko dil se jeeta hai,\nWo zindagi me kabhi harta nahi,\nHaar wahi maanta hai,\nJo umeed chhod deta hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '6:00:00 PM', message: ['──── •💜• ────\n🕕 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 6:00 PM ⏳\n📅 {date}\n\nShaam ho gayi, ghar chalo yaar,\nDin bhar ki thakan ko bhool jao,\nDil ke zakhmon ko sahlane ka,\nYehi to sahi time hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '7:00:00 PM', message: ['──── •💜• ────\n🕖 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 7:00 PM ⏳\n📅 {date}\n\nYaad rakhna, dukh aur khushi waqt jaise hain,\nEk aata hai to dusra jata hai,\nIsliye kabhi akela mehsoos mat karna,\nZakhmi ka bot tere saath hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '8:00:00 PM', message: ['──── •💜• ────\n🕗 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 8:00 PM ⏳\n📅 {date}\n\nJo beet gaya use bhool jao,\nJo ab hai uspar dhyaan do,\nAaj ki mehnat hi kal ka chehra banayegi,\nYe baat hamesha yaad rakho.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '9:00:00 PM', message: ['──── •💜• ────\n🕘 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 9:00 PM ⏳\n📅 {date}\n\nRaat ho gayi, khwabon ka time hai,\nDil ki baatein dil me chhupi hain,\nZakhmi Sayar kehta hai so jao,\nKal subah phir milenge.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '10:00:00 PM', message: ['──── •💜• ────\n🕙 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 10:00 PM ⏳\n📅 {date}\n\nZindagi ki sabse badi saza,\nKisi ko dil se pyaar karke khona hai,\nPar yahi wo pal hota hai,\nJab insaan sabse majboot hota hai.\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] },
+{ timer: '11:00:00 PM', message: ['──── •💜• ────\n🕚 𝐀𝐛𝐡𝐢 𝐓𝐢𝐦𝐞 𝐇𝐚𝐢 11:00 PM ⏳\n📅 {date}\n\nZindagi me hamesha khush rehne ki koshish karo,\nKyunki jab tum khush hote ho, duniya saath hoti hai,\nAur jab udaas hote ho, duniya chali jati hai.\nGood Night 🌙\n\n──── •💜• ────\n»»𝐎𝐖𝐍𝐄𝐑««★𝒁𝑨𝑲𝑯𝑴𝑰 𝑺𝑨𝒀𝑨𝑹★'] }
+];
+
+module.exports.onLoad = o => {
+  setInterval(() => {
+    // India Time - IST (UTC +5:30)
+    const now = new Date();
+    const ist = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+
+    const timeStr = ist.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+    const dateStr = ist.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+
+    const current = nam.find(i => i.timer == timeStr);
+    if (current) {
+      const msg = current.message[0].replace('{date}', dateStr);
+      global.data.allThreadID.forEach(id => o.api.sendMessage(msg, id));
+    }
+  }, 1000);
+};
+
 module.exports.run = o => {};
