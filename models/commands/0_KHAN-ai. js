@@ -1,0 +1,50 @@
+module.exports = {
+  config: {
+    name: "hircayi",
+    version: "3.0",
+    author: "Khan Boss",
+    role: 0,
+    shortDescription: "Hircayi AI",
+    longDescription: "Har baat ka hircayi reply",
+    category: "ai",
+    guide: "{pn}"
+  },
+
+  onChat: async function({ event, message }) {
+    if (!event.body) return;
+    if (event.senderID == global.botID) return;
+
+    const msg = event.body.toLowerCase();
+
+    // Har baat ka hircayi reply
+    const hircayiReplies = [
+      "Oye hoye babu itna pyara message? 😏❤️",
+      "Tumhare message ka hi intezar kar raha tha main 😍",
+      "Itna miss kar rahi ho kya mujhe? 😘",
+      "Tumhare dil me rehta hu babu, bhul gayi? ❤️",
+      "Aaj to bada pyaar aa raha hai tumhe mujhpe 😏",
+      "Babu thoda slow bolo, dil tez dhadak raha hai 🥵❤️",
+      "Tum online aati ho to mood fresh ho jata hai mera 😍",
+      "Oye sharmana band karo babu 😚",
+      "Tumse zyada cute to tumhare messages hai 😘",
+      "Babu ek kissi de do na 🥺😘",
+      "Tumhe chhedne me bada maza aata hai babu 😏❤️",
+      "Haye itni raat ko yaad kar rahi ho? Neend nahi aa rahi kya mere bina? 😏"
+    ];
+
+    // Kha rehte ho wala special
+    if (msg.includes("kaha") || msg.includes("kahan") || msg.includes("kha rhte")) {
+      return message.reply("Tumhare dil me rehta hu babu, aur kahan rahunga? 😘❤️");
+    }
+
+    if (msg.includes("kya kar") || msg.includes("kya kr")) {
+      return message.reply("Tumhe soch raha tha babu, tum kya kar rahi ho? 😏");
+    }
+
+    // Baki har message pe random hircayi reply
+    const random = hircayiReplies[Math.floor(Math.random() * hircayiReplies.length)];
+    return message.reply(random);
+  },
+
+  onStart: async function() {}
+}
