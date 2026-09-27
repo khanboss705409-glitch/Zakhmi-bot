@@ -57,7 +57,7 @@ module.exports.handleEvent = async ({ api, event, Users }) => {
                             `✰ 𝗖𝗼𝗺𝗺𝗮𝗻𝗱𝘀 ➪ ${totalCommands} 📊\n` +
                             `✰ 𝗢𝘄𝗻𝗲𝗿 ➪ ${ownerName} 👑\n\n` +
                             `┗━━━━━━━━━━━━━━━━━━━━━━━┛\n` +
-                            `𝗠𝗔𝗗𝗘 𝗕𝗬 ❤️‍🔥 𝗦𝗛𝗔𝗔𝗡 𝗞𝗛𝗔𝗡`;
+                            `𝗠𝗔𝗗𝗘 𝗕𝗬 ❤️‍🔥 𝐈𝐌𝐓𝐀𝐍𝗞𝗛𝗔𝗡`;
 
     return api.sendMessage(responseMessage, event.threadID, event.messageID);
   }
