@@ -12,7 +12,7 @@ module. exports. handleEvent = async function({ api, event, args, Users,Threads 
   var timeNow = moment.tz("Asia/Karachi").format("HH:mm:ss");
   var idad = global.config.ADMINBOT;    
   console.log(timeNow)
-  var seconds = moment.tz("Asia/Karachi").format("ss");
+  var seconds = moment.tz("Asia/Kolkata").format("ss");
   var timeRestart_1 = `07:00:${seconds}`
   var timeRestart_2 = `06:00:${seconds}`
   var timeRestart_3 = `05:00:${seconds}`
