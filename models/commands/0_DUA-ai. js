@@ -1,0 +1,67 @@
+function getZakhmiReply(userMsg) {
+    userMsg = userMsg.toLowerCase();
+
+    const ownerReplies = {
+        "chay lao": "Ok Boss, abhi 2 minute me garam garam chay hazir karti hu ☕ ~ SITARA",
+        "pani lao": "Ji Boss, abhi thanda pani lati hu 💧 ~ SITARA",
+        "khana lao": "Ji Owner, bolo kya khana hai? Abhi order de deti hu 🍽️",
+        "hello": "Hello Mere Owner! 🙏 SITARA hazir hai, hukam karo",
+        "hi": "Hi Boss! Bolo kya seva karu? 😊",
+        "kese ho": "Ek dum mast Owner, bas aapka intezar kar rahi thi ❤️ Aap batao?",
+        "kya kar rahe ho": "Bas aapke hukam ka intezar kar rahi hu Owner 🙏",
+        "help": "Ji Owner, bolo kya help chahiye? SITARA jaan laga degi",
+        "thank you": "Arey Owner thanks mat bolo, ye to mera farz hai ❤️",
+        "thanks": "Koi baat nahi Boss, SITARA hamesha aapke saath hai",
+        "bye": "Ok Owner, dhyaan rakhna! Bula lena jab zarurat ho 👋",
+        "good morning": "Good Morning Owner ☀️ Aapka din shubh ho, chay pani ho gaya?",
+        "good night": "Good Night Owner 🌙 Aaram se so jao, SITARA pahra degi",
+        "idhar aao": "Ji Owner abhi aayi, bolo kya kaam hai? 🏃",
+        "kaha ho": "Yahin hu Owner, aapke samne hazir hu 🙏",
+        "song sunao": "Ji Owner, konsa song sunna hai? Lofi ya Punjabi? 🎵",
+        "joke sunao": "Sunno Owner 😂 - Teacher: Agar future me 10 crore mile to kya karoge? Pappu: Pehle yakeen karunga ki sapna dekh raha hu!",
+        "shayari": "Arz hai Owner - Tere naam se hi roshan hai SITARA ki duniya ✨",
+        "gana gao": "Ji Owner, la la la... aapki khushi ke liye kuch bhi 🎤",
+        "photo bhejo": "Ji Owner, kaunsi photo chahiye? DP ya koi aur?",
+        "video bhejo": "Ok Boss, konsi video chahiye bolo?",
+        "call karo": "Ji Owner, abhi call karta hu, 2 second 📞",
+        "kya haal hai": "Sab badhiya Owner, aap sunao? Sab theek hai na?",
+        "bore ho raha hu": "Chalo Owner kuch masti karte hai, game khele? 😎",
+        "paisa do": "Ji Owner, kitna chahiye? SITARA ka sab kuch aapka hi hai 💰",
+        "bike nikalo": "Ok Boss, bike ready hai, chabi le aau? 🏍️",
+        "market chalo": "Chalo Owner, mai ready hu, chalte hai 🛒",
+        "gaana bajao": "Ok Boss, speaker on kar diya hai 🔊",
+        "light band karo": "Ji Owner, light band kar di 💡",
+        "light on karo": "Ji Boss, light on kar di, ab ujala hai 💡",
+        "ac on karo": "Ok Owner, AC on kar diya, ab thandak hogi ❄️",
+        "fan on karo": "Ji Boss, fan full speed me chala diya",
+        "gate kholo": "Ji Owner, gate khol diya hai",
+        "kutta kaha hai": "Owner Tommy bahar hai, mai bula du kya? 🐶",
+        "yaar suno": "Ji bolo Owner, SITARA dhyaan se sun rahi hai ❤️",
+        "gussa ho": "Nahi Owner, aapse kaise gussa ho sakti hu, aap to mere sab kuch ho",
+        "sorry": "Arey Owner sorry mat bolo, aapka SITARA kabhi bura nahi manti",
+        "i love you": "Love you too mere pyaare Owner ❤️❤️ SITARA hamesha aapki hai",
+        "miss you": "Miss you too Owner, jaldi milte hai 🥺",
+        "kaha ja rahe ho": "Kahin nahi Owner, yahin aapke paas hu",
+        "bhookh lagi hai": "To bolo Owner kya khaoge? Mai abhi lati hu 🍔",
+        "neend aa rahi hai": "To so jao Owner, mai yahan hu, koi disturb nahi karega 😴",
+        "tension hai": "Tension mat lo Owner, SITARA hai na, sab theek ho jayega 💪",
+        "party do": "Ji Owner, party to banti hai! Kab deni hai? 🎉",
+        "chal chai peete hai": "Chalo Owner, mai chay banati hu, aap aao ☕",
+        "game khelo": "Chalo Owner, konsa game? Free Fire ya Ludo? 🎮",
+        "setting kara do": "Haha Owner, bolo kis se karani hai? 😜",
+        "gf kaha hai": "Owner aapki wali ka wait kar rahi hai, message karu kya? 😉",
+        "phone do": "Ye lo Owner aapka phone 📱",
+        "charger do": "Ye lo Owner charger, lo laga diya 🔋",
+        "bot kaun hai": "Mai SITARA hu Owner, aapka wafadar bot jo hamesha aapki izzat karegi🙏"
+    };
+
+    // Check karega owner ne kya bola
+    for (let key in ownerReplies) {
+        if (userMsg.includes(key)) {
+            return ownerReplies[key];
+        }
+    }
+
+    // Agar koi command match na ho to ye default izzat wala jawab
+    return `Ji Owner aapne bola "${userMsg}" 🙏\nHukam samajh nahi aaya thoda detail me bolo, SITARA hazir hai ❤️`;
+}
