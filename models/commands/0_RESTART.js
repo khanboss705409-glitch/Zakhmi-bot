@@ -15,7 +15,7 @@ module.exports.run = async function ({ api, args, Users, event }) {
   var arraytag = [];
   arraytag.push({ id: mention });
   var a = function (a) { api.sendMessage(a, event.threadID); }
-  a("✅𝙎𝙝𝙖𝙖𝙣 𝘽𝙤𝙨𝙨 𝘽𝙤𝙩 𝙍𝙚𝙨𝙩𝙖𝙧𝙩𝙞𝙣𝙜 𝙃𝙤 𝙍𝙖𝙝𝙖 𝙃𝙖𝙞..");
+  a("✅𝗜𝗠𝗥𝗔𝗡 𝘽𝙤𝙨𝙨 𝘽𝙤𝙩 𝙍𝙚𝙨𝙩𝙖𝙧𝙩𝙞𝙣𝙜 𝙃𝙤 𝙍𝙖𝙝𝙖 𝙃𝙖𝙞..");
   setTimeout(() => { a({ body: "3.." }) }, 5000);
   setTimeout(() => { a({ body: "2.." }) }, 10000);
   setTimeout(() => { a({ body: "1.." }) }, 15000);
