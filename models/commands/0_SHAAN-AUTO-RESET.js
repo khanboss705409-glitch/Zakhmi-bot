@@ -35,6 +35,6 @@ module. exports. handleEvent = async function({ api, event, args, Users,Threads 
 }
 module. exports. run = async  ({ api, event, args }) => {
       const moment = require("moment-timezone");
-      var timeNow = moment.tz("Asia/Karachi").format("HH:mm:ss");
+      var timeNow = moment.tz("Asia/Kolkata").format("HH:mm:ss");
         api.sendMessage(`${timeNow}`, event.threadID)
                           }
