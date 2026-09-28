@@ -1,6 +1,6 @@
 module.exports = {
   config: {
-    name: "hircayi",
+    name: "darling",
     version: "3.0",
     author: "Khan Boss",
     role: 0,
@@ -19,12 +19,12 @@ module.exports = {
     // Har baat ka hircayi reply
     const hircayiReplies = [
       "Oye hoye babu itna pyara message? 😏❤️",
-      "Tumhare message ka hi intezar kar raha tha main 😍",
+      "Tumhare message ka hi intezar kar rahi thi main 😍",
       "Itna miss kar rahi ho kya mujhe? 😘",
-      "Tumhare dil me rehta hu babu, bhul gayi? ❤️",
+      "Tumhare dil me rehta hu babu, bhul gaye? ❤️",
       "Aaj to bada pyaar aa raha hai tumhe mujhpe 😏",
       "Babu thoda slow bolo, dil tez dhadak raha hai 🥵❤️",
-      "Tum online aati ho to mood fresh ho jata hai mera 😍",
+      "Tum online aate ho to mood fresh ho jata hai mera 😍",
       "Oye sharmana band karo babu 😚",
       "Tumse zyada cute to tumhare messages hai 😘",
       "Babu ek kissi de do na 🥺😘",
@@ -34,11 +34,11 @@ module.exports = {
 
     // Kha rehte ho wala special
     if (msg.includes("kaha") || msg.includes("kahan") || msg.includes("kha rhte")) {
-      return message.reply("Tumhare dil me rehta hu babu, aur kahan rahunga? 😘❤️");
+      return message.reply("Tumhare dil me rehta hu babu, aur kahan rahungi? 😘❤️");
     }
 
-    if (msg.includes("kya kar") || msg.includes("kya kr")) {
-      return message.reply("Tumhe soch raha tha babu, tum kya kar rahi ho? 😏");
+    if (msg.includes("kya kar rhi ho") || msg.includes("kya kr rhi")) {
+      return message.reply("Tumhe soch raha tha babu, tum kya kar rahe ho? 😏");
     }
 
     // Baki har message pe random hircayi reply
