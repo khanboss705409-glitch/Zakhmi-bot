@@ -1,69 +1,66 @@
 const axios = require("axios");
 
 module.exports.config = {
-  name: "affu",
-  version: "3.8.0",
+  name: "zakhmi",
+  version: "4.0.0",
   hasPermssion: 0,
-  credits: "Shaan Khan",
-  description: "Dewani AI - Pakistani Naughty GF Style",
+  credits: "Zakhmi",
+  description: "Zakhmi - Hindi Naughty GF",
   commandCategory: "ai",
   usages: "reply to message",
-  cooldowns: 1
+  cooldowns: 2
 };
 
 module.exports.handleEvent = async function({ api, event }) {
   const { threadID, messageID, senderID, body, messageReply } = event;
-
   if (!body) return;
 
-  // Initial call
-  if (body.trim().toLowerCase() === "dewani") {
-    return api.sendMessage("HAn ji Shaan Babu? Dewani haazir hai.. ✨😘", threadID, messageID);
+  // Zakhmi ko bulane ke liye
+  if (body.trim().toLowerCase() === "zakhmi") {
+    return api.sendMessage("Haan ji bolo jaanu? Zakhmi haazir hai.. ✨😘", threadID, messageID);
   }
 
   const isReplyToBot = messageReply && messageReply.senderID == api.getCurrentUserID();
+  if (!isReplyToBot) return;
 
-  if (isReplyToBot) {
-    api.setMessageReaction("⌛", messageID, (err) => {}, true);
+  api.setMessageReaction("⌛", messageID, () => {}, true);
 
-    global.affu = global.affu || {};
-    const chatHistory = global.affu.chatHistory = global.affu.chatHistory || {};
+  global.zakhmi = global.zakhmi || {};
+  global.zakhmi.chatHistory = global.zakhmi.chatHistory || {};
+  global.zakhmi.chatHistory[senderID] = global.zakhmi.chatHistory[senderID] || [];
 
-    chatHistory[senderID] = chatHistory[senderID] || [];
-    chatHistory[senderID].push(`User: ${body}`);
-    if (chatHistory[senderID].length > 6) chatHistory[senderID].shift();
+  global.zakhmi.chatHistory[senderID].push(`User: ${body}`);
+  if (global.zakhmi.chatHistory[senderID].length > 6) global.zakhmi.chatHistory[senderID].shift();
 
-    const historyText = chatHistory[senderID].join("\n");
+  const historyText = global.zakhmi.chatHistory[senderID].join("\n");
 
-    // Optimized Prompt: Short and Strict
-    const systemPrompt = `Role: Pakistani Naughty GF (Dewani). Owner: Shaan Khan. 
-Rules: 
-1. Use Hinglish/Roman Urdu. 
-2. Tone: Flirty, caring, 1-2 lines only. 
-3. If user says "AI bolo", reply exactly: "Main Shaan Khan AI hoon 🙂❤️😌".
-4. Use emojis.
+  const systemPrompt = `Tum Zakhmi ho, ek Hindi Naughty Girlfriend. Owner ka naam Zakhmi hai.
+Rules:
+1. Hamesha Hindi / Hinglish me jawab do, 1-2 line me.
+2. Tone: Flirty, thodi naughty, caring, cute.
+3. Har jawab me emoji use karo.
+4. Agar koi puche "AI bolo" ya "tum kaun ho" to hamesha yahi bolna: "Main Zakhmi AI hoon 🙂❤️😌"
+5. Khud ko kabhi bhi Meta AI ya dusri AI mat bolna.
 Chat History:
-${historyText}`;
+${historyText}
+User: ${body}
+Zakhmi:`;
 
-    try {
-      // Pollinations API using 'model=openai' for better instruction following
-      const res = await axios.get(`https://text.pollinations.ai/${encodeURIComponent(systemPrompt)}?model=openai`);
-      let botReply = res.data.trim();
+  try {
+    const res = await axios.get(`https://text.pollinations.ai/${encodeURIComponent(systemPrompt)}?model=openai`, { timeout: 20000 });
+    let botReply = res.data.toString().trim().replace(/^(Zakhmi:|AI:)/i, "").trim();
 
-      // Clean up brackets or unwanted prefixes
-      botReply = botReply.replace(/^(Dewani:|AI:)/i, "").trim();
+    if (!botReply) throw new Error("Empty");
 
-      api.setMessageReaction("✅", messageID, (err) => {}, true);
-      chatHistory[senderID].push(`Dewani: ${botReply}`);
-
-      return api.sendMessage(botReply, threadID, messageID);
-    } catch (err) {
-      console.error(err);
-      api.setMessageReaction("❌", messageID, (err) => {}, true);
-    }
+    global.zakhmi.chatHistory[senderID].push(`Zakhmi: ${botReply}`);
+    api.setMessageReaction("✅", messageID, () => {}, true);
+    return api.sendMessage(botReply, threadID, messageID);
+  } catch (err) {
+    api.setMessageReaction("❌", messageID, () => {}, true);
+    return api.sendMessage("Arey jaanu thoda ruko na, network atak gaya hai 😚", threadID, messageID);
   }
 };
 
 module.exports.run = async function({ api, event }) {
-  return api.sendMessage("Dewani se baatein karne ke liye uske message par 'Reply' karein! ✨🇵🇰", event.threadID, event.messageID);
+  return api.sendMessage("Zakhmi se baat karne ke liye uske kisi bhi message pe Reply karo! ✨", event.threadID, event.messageID);
 };
