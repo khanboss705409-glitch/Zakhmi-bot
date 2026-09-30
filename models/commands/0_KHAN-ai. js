@@ -13,7 +13,6 @@ module.exports.config = {
 
 module.exports.handleEvent = async function({ api, event }) {
   const { threadID, messageID, senderID, body, messageReply } = event;
-
   if (!body) return;
 
   if (body.trim().toLowerCase() === "babu") {
@@ -23,39 +22,33 @@ module.exports.handleEvent = async function({ api, event }) {
   const isReplyToBot = messageReply && messageReply.senderID == api.getCurrentUserID();
   if (!isReplyToBot) return;
 
-  api.setMessageReaction("⌛", messageID, (err) => {}, true);
-
-  global.babu = global.babu || {};
-  const chatHistory = global.babu.chatHistory = global.babu.chatHistory || {};
-  chatHistory[senderID] = chatHistory[senderID] || [];
-  chatHistory[senderID].push(`User: ${body}`);
-  if (chatHistory[senderID].length > 6) chatHistory[senderID].shift();
-  const historyText = chatHistory[senderID].join("\n");
-
-  const systemPrompt = `You are Sitara, a naughty, funny, roasting Indian girl in a group chat.
-  Your Owner/Creator is Thakur Sahab.
-
-  RULES - Follow strictly:
-    1. DEFAULT BEHAVIOUR: Give funny, masti, roasting reply according to user's message. Use Hinglish (Roman Hindi + English). Do NOT add Thakur Sahab name in every reply.
-    2. SPECIAL CONDITION: ONLY if user asks "tumhe kisne banaya", "owner kon hai", "boss kon hai", "creator kon", "tumhara malik kon hai", then you MUST reply: "Mujhe mere Thakur Sahab ne banaya hai 👑". Otherwise never say owner name.
-    3. Keep reply short 1-2 lines.
-    4. Use emojis and be savage/funny.
-    5. Never say you are Meta AI or Pollinations.
-
-  Chat History:
-  ${historyText}
-  Latest: ${body}`;
+  api.setMessageReaction("⌛", messageID, () => {}, true);
 
   try {
-    const res = await axios.get(`https://text.pollinations.ai/${encodeURIComponent(systemPrompt)}?model=openai`);
-    let botReply = res.data.trim().replace(/^(babu:|AI:|Sitara:)/i, "").trim();
+    const systemPrompt = `You are Sitara, a naughty, funny, roasting Indian girl.
+Owner is Thakur Sahab.
+RULES: 1. Give funny Hinglish reply 1-2 lines, savage, emojis.
+2. ONLY if user asks "tumhe kisne banaya, owner kon hai, creator kon" then reply "Mujhe mere Thakur Sahab ne banaya hai 👑" else never say owner name.
+3. Never say you are Meta AI or Pollinations.`;
 
-    api.setMessageReaction("✅", messageID, (err) => {}, true);
-    chatHistory[senderID].push(`Sitara: ${botReply}`);
+    const res = await axios.post("https://text.pollinations.ai/openai", {
+      model: "openai",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: body }
+      ]
+    });
+
+    let botReply = res.data.choices[0].message.content.trim();
+    botReply = botReply.replace(/^(babu:|AI:|Sitara:)/i, "").trim();
+
+    api.setMessageReaction("✅", messageID, () => {}, true);
     return api.sendMessage(botReply, threadID, messageID);
+
   } catch (err) {
-    console.error(err);
-    api.setMessageReaction("❌", messageID, (err) => {}, true);
+    console.log(err.response?.data || err.message);
+    api.setMessageReaction("❌", messageID, () => {}, true);
+    return api.sendMessage("Arey server busy hai jaanu, 2 sec baad phir bol 😜", threadID, messageID);
   }
 };
 
