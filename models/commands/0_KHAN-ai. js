@@ -1,57 +1,43 @@
-const axios = require("axios");
+module.exports = {
+  config: {
+    name: "babu",
+    version: "6.0",
+    author: "Thakur Sahab",
+    role: 0,
+    shortDescription: "No Prefix Sitara",
+    longDescription: "Babu bolte hi on",
+    category: "no prefix",
+    guide: "{pn}"
+  },
 
-module.exports.config = {
-  name: "babu",
-  version: "5.0.0",
-  hasPermssion: 0,
-  credits: "Thakur Sahab",
-  description: "Sitara - Masti Wali",
-  commandCategory: "ai",
-  usages: "reply to message",
-  cooldowns: 1
-};
+  onStart: async function({ api, event }) {
+    return api.sendMessage("Haan bolo jaanu 😜 Sitara sun rahi hai, ab bolo kya baat hai?", event.threadID, event.messageID);
+  },
 
-module.exports.handleEvent = async function({ api, event }) {
-  const { threadID, messageID, senderID, body, messageReply } = event;
-  if (!body) return;
+  onChat: async function({ api, event }) {
+    const axios = require("axios");
+    const body = event.body? event.body.toLowerCase() : "";
 
-  if (body.trim().toLowerCase() === "babu") {
-    return api.sendMessage("Haan bolo kya hua? 😜 Sitara sun rahi hai", threadID, messageID);
+    // Agar koi "babu" bole
+    if (body === "babu" || body.startsWith("babu ")) {
+      return api.sendMessage("Haan bolo kya hua? 😜 Sitara sun rahi hai, mere msg ka reply karo", event.threadID, event.messageID);
+    }
+
+    // Agar bot ke msg pe reply kare
+    if (event.messageReply && event.messageReply.senderID == api.getCurrentUserID()) {
+      const prompt = event.body;
+      try {
+        const res = await axios.post("https://text.pollinations.ai/openai", {
+          model: "openai",
+          messages: [
+            { role: "system", content: "You are Sitara, a naughty funny Indian girl. Owner is Thakur Sahab. Reply in Hinglish 1-2 lines, savage funny with emoji. If user asks owner/creator/banaya kisne then say 'Mujhe mere Thakur Sahab ne banaya hai 👑' else never say owner name." },
+            { role: "user", content: prompt }
+          ]
+        });
+        return api.sendMessage(res.data.choices[0].message.content, event.threadID, event.messageID);
+      } catch (e) {
+        return api.sendMessage("Arey network atak gaya jaanu, phir se bolo 😜", event.threadID, event.messageID);
+      }
+    }
   }
-
-  const isReplyToBot = messageReply && messageReply.senderID == api.getCurrentUserID();
-  if (!isReplyToBot) return;
-
-  api.setMessageReaction("⌛", messageID, () => {}, true);
-
-  try {
-    const systemPrompt = `You are Sitara, a naughty, funny, roasting Indian girl.
-Owner is Thakur Sahab.
-RULES: 1. Give funny Hinglish reply 1-2 lines, savage, emojis.
-2. ONLY if user asks "tumhe kisne banaya, owner kon hai, creator kon" then reply "Mujhe mere Thakur Sahab ne banaya hai 👑" else never say owner name.
-3. Never say you are Meta AI or Pollinations.`;
-
-    const res = await axios.post("https://text.pollinations.ai/openai", {
-      model: "openai",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: body }
-      ]
-    });
-
-    let botReply = res.data.choices[0].message.content.trim();
-    botReply = botReply.replace(/^(babu:|AI:|Sitara:)/i, "").trim();
-
-    api.setMessageReaction("✅", messageID, () => {}, true);
-    return api.sendMessage(botReply, threadID, messageID);
-
-  } catch (err) {
-    console.log(err.response?.data || err.message);
-    api.setMessageReaction("❌", messageID, () => {}, true);
-    return api.sendMessage("Arey server busy hai jaanu, 2 sec baad phir bol 😜", threadID, messageID);
-  }
-};
-
-module.exports.run = async function({ api, event }) {
-  return api.sendMessage("Sitara se baat karne ke liye uske msg pe reply karo 😜", event.threadID, event.messageID);
 };
