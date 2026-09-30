@@ -13,7 +13,7 @@
   "notiGroup": true,
   "NOTIFICATION": true,
   "autoClean": true,
-  "commandDisabled": [],
+  "commandDisabled": ["ai.js", "gpt.js"]
   "eventDisabled": ["join.js"],
   "DATABASE": {
     "sqlite": {
