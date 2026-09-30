@@ -2,10 +2,10 @@ const axios = require("axios");
 
 module.exports.config = {
   name: "babu",
-  version: "3.8.0",
+  version: "5.0.0",
   hasPermssion: 0,
-  credits: "Shaan Khan",
-  description: "Dewani AI - india Naughty GF Style",
+  credits: "Thakur Sahab",
+  description: "Sitara - Masti Wali",
   commandCategory: "ai",
   usages: "reply to message",
   cooldowns: 1
@@ -16,54 +16,49 @@ module.exports.handleEvent = async function({ api, event }) {
 
   if (!body) return;
 
-  // Initial call
   if (body.trim().toLowerCase() === "babu") {
-    return api.sendMessage("HAn ji imran Babu? Sitara haazir hai.. ✨😘", threadID, messageID);
+    return api.sendMessage("Haan bolo kya hua? 😜 Sitara sun rahi hai", threadID, messageID);
   }
 
   const isReplyToBot = messageReply && messageReply.senderID == api.getCurrentUserID();
+  if (!isReplyToBot) return;
 
-  if (isReplyToBot) {
-    api.setMessageReaction("⌛", messageID, (err) => {}, true);
+  api.setMessageReaction("⌛", messageID, (err) => {}, true);
 
-    global.affu = global.babu || {};
-    const chatHistory = global.babu.chatHistory = global.babu.chatHistory || {};
+  global.babu = global.babu || {};
+  const chatHistory = global.babu.chatHistory = global.babu.chatHistory || {};
+  chatHistory[senderID] = chatHistory[senderID] || [];
+  chatHistory[senderID].push(`User: ${body}`);
+  if (chatHistory[senderID].length > 6) chatHistory[senderID].shift();
+  const historyText = chatHistory[senderID].join("\n");
 
-    chatHistory[senderID] = chatHistory[senderID] || [];
-    chatHistory[senderID].push(`User: ${body}`);
-    if (chatHistory[senderID].length > 6) chatHistory[senderID].shift();
+  const systemPrompt = `You are Sitara, a naughty, funny, roasting Indian girl in a group chat.
+  Your Owner/Creator is Thakur Sahab.
 
-    const historyText = chatHistory[senderID].join("\n");
+  RULES - Follow strictly:
+    1. DEFAULT BEHAVIOUR: Give funny, masti, roasting reply according to user's message. Use Hinglish (Roman Hindi + English). Do NOT add Thakur Sahab name in every reply.
+    2. SPECIAL CONDITION: ONLY if user asks "tumhe kisne banaya", "owner kon hai", "boss kon hai", "creator kon", "tumhara malik kon hai", then you MUST reply: "Mujhe mere Thakur Sahab ne banaya hai 👑". Otherwise never say owner name.
+    3. Keep reply short 1-2 lines.
+    4. Use emojis and be savage/funny.
+    5. Never say you are Meta AI or Pollinations.
 
-    // Optimized Prompt: Short and Strict
-    const systemPrompt = `Role: India Naughty GF (babu). Owner: Imran Khan. 
-Rules: 
-1. Use Hinglish/Roman English . 
-2. Tone: Flirty, caring, 1-2 lines only. 
-3. If user says "AI bolo", reply exactly: "Main imran Khan AI hoon 🙂❤️😌".
-4. Use emojis.
-Chat History:
-${historyText}`;
+  Chat History:
+  ${historyText}
+  Latest: ${body}`;
 
-    try {
-      // Pollinations API using 'model=openai' for better instruction following
-      const res = await axios.get(`https://text.pollinations.ai/${encodeURIComponent(systemPrompt)}?model=openai`);
-      let botReply = res.data.trim();
+  try {
+    const res = await axios.get(`https://text.pollinations.ai/${encodeURIComponent(systemPrompt)}?model=openai`);
+    let botReply = res.data.trim().replace(/^(babu:|AI:|Sitara:)/i, "").trim();
 
-      // Clean up brackets or unwanted prefixes
-      botReply = botReply.replace(/^(babu:|AI:)/i, "").trim();
-
-      api.setMessageReaction("✅", messageID, (err) => {}, true);
-      chatHistory[senderID].push(`babu: ${botReply}`);
-
-      return api.sendMessage(botReply, threadID, messageID);
-    } catch (err) {
-      console.error(err);
-      api.setMessageReaction("❌", messageID, (err) => {}, true);
-    }
+    api.setMessageReaction("✅", messageID, (err) => {}, true);
+    chatHistory[senderID].push(`Sitara: ${botReply}`);
+    return api.sendMessage(botReply, threadID, messageID);
+  } catch (err) {
+    console.error(err);
+    api.setMessageReaction("❌", messageID, (err) => {}, true);
   }
 };
 
 module.exports.run = async function({ api, event }) {
-  return api.sendMessage("sitara se baatein karne ke liye uske message par 'Reply' karein! ✨🇮🇳", event.threadID, event.messageID);
+  return api.sendMessage("Sitara se baat karne ke liye uske msg pe reply karo 😜", event.threadID, event.messageID);
 };
