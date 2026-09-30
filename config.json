@@ -2,7 +2,7 @@
   "language": "en",
   "DeveloperMode": false,
   "autoCreateDB": true,
-  "BOTNAME": "★™𝐒𝐢𝐭𝐚𝐫𝐚 𝐍𝐨𝐨𝐫❣️",
+  "BOTNAME": "THAKUR SAHAB x BOT ❤️",
   "PREFIX": ".",
   "ADMINBOT": ["61594758699085"],
   "NDH": ["61594758699085"],
@@ -13,7 +13,7 @@
   "notiGroup": true,
   "NOTIFICATION": true,
   "autoClean": true,
-  "commandDisabled": ["sim.js"],
+  "commandDisabled": [],
   "eventDisabled": ["join.js"],
   "DATABASE": {
     "sqlite": {
