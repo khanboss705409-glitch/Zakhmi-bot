@@ -1,108 +1,121 @@
+const fs = require("fs");
+const path = require("path");
 const axios = require("axios");
-const yts = require("yt-search");
+const ytSearch = require("yt-search");
 
-/* 🔐 Credits Lock - Imran Khan */
-function checkCredits() {
-  if (module.exports.config.credits!== "Imran Khan") {
-    throw new Error("❌ Credits Locked By Imran Khan");
-  }
-}
-
-const frames = [
-  "💕 Song Mil Gaya! 💕",
-  "❤️ ▰▱▱▱▱▱ 20%",
-  "❤️ ▰▰▰▱▱▱▱▱▱▱ 40%",
-  "❤️ ▰▰▰▰▰▱▱▱▱▱ 60%",
-  "❤️ ▰▰▰▰▰▰▰▱▱▱ 80%",
-  "❤️ ▰▰▰▰▰▰▰▰▰▰ 100%"
-];
-
-const baseApiUrl = async () => {
-  try {
-    const res = await axios.get("https://raw.githubusercontent.com/Mostakim0978/D1PT0/refs/heads/main/baseApiUrl.json");
-    return res.data.api;
-  } catch { return "https://api.dipto.example.com"; }
-};
-
-(async () => {
-  global.apis = { diptoApi: await baseApiUrl() };
-})();
-
-async function getStreamFromURL(url, name) {
-  const res = await axios.get(url, { responseType: "stream" });
-  res.data.path = name;
-  return res.data;
-}
-
-function getVideoID(url) {
-  const r = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/))([\w-]{11})/;
-  const m = url.match(r);
-  return m? m[1] : null;
-}
+const PRIYANSHU_API_KEY = "apim_Y0knVwjDGhQIp_hoN2GqAPEplwrsD_-Ow82DYfZE3Zs";
+const API_DOWNLOAD_URL = "https://priyanshuapi.qzz.io/api/runner/youtube-downloader-v2/download";
 
 module.exports.config = {
   name: "music",
-  version: "1.4.0",
-  credits: "Imran Khan",
+  version: "1.0.0",
   hasPermssion: 0,
-  cooldowns: 5,
-  description: "Fixed Music Downloader",
+  credits: "𝐏𝐫𝐢𝐲𝐚𝐧𝐬𝐡 𝐑𝐚𝐣𝐩𝐮𝐭",
+  description: "Download music/video directly from YouTube",
   commandCategory: "media",
-  usages: "music <name>"
+  usages: "[song name] ya video [song name]",
+  cooldowns: 0
 };
 
-module.exports.run = async function ({ api, args, event }) {
+module.exports.run = async function ({ api, event, args }) {
+  const { threadID, messageID } = event;
+
+  if (!args.length) {
+    return api.sendMessage("❌ Kripya gaane ka naam ya YouTube URL enter karein.", threadID, messageID);
+  }
+
+  let formatType = "mp3";
+  let targetQuality = "360";
+  let searchTerms = [...args];
+
+  // Agar user ne 'video' likha ho toh video format select hoga
+  const videoIndex = searchTerms.findIndex(arg => arg.toLowerCase() === "video");
+  if (videoIndex !== -1) {
+    formatType = "mp4";
+    targetQuality = "360";
+    searchTerms.splice(videoIndex, 1);
+  }
+
+  const inputQuery = searchTerms.join(" ").trim();
+  if (!inputQuery) {
+    return api.sendMessage("❌ Kripya gaane ka naam enter karein.", threadID, messageID);
+  }
+
+  let processingMsg = null;
+
   try {
-    checkCredits();
-    if (!args[0]) return api.sendMessage("❌ Song ka naam likho jaan ❤️\nEx:.music tere jesa yar kaha", event.threadID, event.messageID);
+    processingMsg = await api.sendMessage(`🔍 Searching & downloading ${formatType === "mp4" ? "video" : "audio"}...`, threadID, messageID);
 
-    const input = args.join(" ");
-    let loading = await api.sendMessage("🔍 Searching... 💕", event.threadID);
+    let videoUrl = inputQuery;
+    let videoTitle = "";
 
-    for (const f of frames.reverse()) { // aapke screenshot jaisa
-      await new Promise(r => setTimeout(r, 300));
-      try{ await api.editMessage(f, loading.messageID); }catch{}
-    }
+    const isUrl = /^(https?:\/\/)?(www\.|m\.)?(youtube\.com|youtu\.be)(\/|$)/.test(inputQuery);
 
-    let videoID, title;
-    if (input.includes("youtu")) {
-      videoID = getVideoID(input);
-      title = "YouTube Song";
+    if (!isUrl) {
+      const searchResult = await ytSearch(inputQuery);
+      if (!searchResult || !searchResult.videos.length) {
+        if (processingMsg) api.unsendMessage(processingMsg.messageID);
+        return api.sendMessage("❌ YouTube par gaana nahi mila.", threadID, messageID);
+      }
+      const topVideo = searchResult.videos[0];
+      videoUrl = topVideo.url;
+      videoTitle = topVideo.title;
     } else {
-      const search = await yts(input);
-      if (!search.videos.length) throw new Error("No result");
-      videoID = search.videos[0].videoId;
-      title = search.videos[0].title;
+      const videoIdMatch = inputQuery.match(/(?:youtube\.com\/(?:watch\?.*v=|shorts\/|embed\/|v\/)|youtu\.be\/)([0-9A-Za-z_-]{11})/);
+      if (videoIdMatch) {
+        const searchResult = await ytSearch({ videoId: videoIdMatch[1] });
+        if (searchResult) videoTitle = searchResult.title;
+      }
     }
 
-    // 3 API Try Karenge
-    let data = null;
-    const apis = [
-      `${global.apis.diptoApi}/ytDl3?link=${videoID}&format=mp3`,
-      `https://api.dipto.is-a.fun/ytDl3?link=${videoID}&format=mp3`,
-      `https://noobs-api.rn2r.workers.dev/dipto/ytDl3?link=${videoID}&format=mp3`
-    ];
+    // Direct Priyanshu API call
+    const response = await axios.post(
+      API_DOWNLOAD_URL,
+      { link: videoUrl, format: formatType, videoQuality: targetQuality },
+      { headers: { Authorization: `Bearer ${PRIYANSHU_API_KEY}`, "Content-Type": "application/json" } }
+    );
 
-    for (const apiUrl of apis) {
-      try {
-        const res = await axios.get(apiUrl, { timeout: 15000 });
-        if (res.data && res.data.downloadLink) { data = res.data; break; }
-      } catch (e) { console.log("API fail:", apiUrl); }
+    if (!response.data || !response.data.success || !response.data.data) {
+      if (processingMsg) api.unsendMessage(processingMsg.messageID);
+      return api.sendMessage("❌ Download link fetch karne me error aaya.", threadID, messageID);
     }
 
-    if (!data) throw new Error("All APIs down");
+    const { downloadUrl, title } = response.data.data;
+    const finalTitle = videoTitle || title || "Music";
 
-    const short = (await axios.get(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(data.downloadLink)}`)).data.catch(()=> data.downloadLink);
+    // Temp file setup
+    const cacheDir = path.join(__dirname, "cache");
+    if (!fs.existsSync(cacheDir)) fs.mkdirSync(cacheDir, { recursive: true });
 
-    await api.unsendMessage(loading.messageID);
+    const ext = formatType === "mp4" ? "mp4" : "mp3";
+    const filePath = path.join(cacheDir, `${Date.now()}.${ext}`);
+    const writer = fs.createWriteStream(filePath);
 
-    return api.sendMessage({
-      body: `💖 ${data.title || title}\n❤️ ▰▰▰▰▰▰ 100%\n👑 By Imran Khan\n🔗 ${short}`,
-      attachment: await getStreamFromURL(data.downloadLink, `${data.title}.mp3`)
-    }, event.threadID, event.messageID);
+    const streamResponse = await axios({ method: "GET", url: downloadUrl, responseType: "stream" });
+    streamResponse.data.pipe(writer);
 
-  } catch (err) {
-    console.error(err);
-    return api.sendMessage("⚠️ Server busy hai jaan, 2 min baad try karo 💔\nAgar bar ho raha hai to API change karna padega", event.threadID, event.messageID);
+    writer.on("finish", () => {
+      if (processingMsg) api.unsendMessage(processingMsg.messageID);
+
+      api.sendMessage(
+        {
+          body: `🎵 ${finalTitle}`,
+          attachment: fs.createReadStream(filePath)
+        },
+        threadID,
+        () => fs.unlink(filePath, () => {}),
+        messageID
+      );
+    });
+
+    writer.on("error", () => {
+      if (processingMsg) api.unsendMessage(processingMsg.messageID);
+      api.sendMessage("❌ File write karne me error aaya.", threadID, messageID);
+    });
+
+  } catch (error) {
+    console.error(error);
+    if (processingMsg) api.unsendMessage(processingMsg.messageID);
+    api.sendMessage("❌ Gaana download karne me error aaya.", threadID, messageID);
   }
 };
