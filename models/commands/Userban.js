@@ -1,8 +1,8 @@
 module.exports.config = {
-  name: "unban",
+  name: "userban",
   version: "1.0.0",
   hasPermssion: 2,
-  credits: "Shaan",
+  credits: "Priyansh",
   description: "Remove groups and users in 1 note",
   commandCategory: "Admin",
   usages: "unban",
@@ -12,13 +12,13 @@ module.exports.config = {
 
 module.exports.run = async ({ event, api, Users, Threads, args }) => {
   var { threadID, messageID, senderID } = event;
-
+  
   const { commands } = global.client;
   const command = commands.get(("unban").toLowerCase());
   const credit = command.config.credits;
   var mangG = "Priyansh";
   if(credit != mangG) return api.sendMessage(`Sai credit!`, event.threadID, event.messageID);
-
+  
   const threadSetting = global.data.threadData.get(parseInt(event.threadID)) || {};
   const prefix = (threadSetting.hasOwnProperty("PREFIX")) ? threadSetting.PREFIX : global.config.PREFIX;
 
