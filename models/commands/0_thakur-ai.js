@@ -50,7 +50,7 @@ async function getAiReply(senderID, promptText) {
 
   const apiKey =
     global.config?.apiKeys?.priyanshuApi ||
-    "apim_8lEUfewp8dXI9KphqYrqhbaJLs6w9tQz_Q6MdYbIC2I";
+    "apim_IkDDMNA74aUimea49ApWZZm81TpjOg3dFYL2Xxi62qU";
 
   const response = await axios.post(
     API_URL,
