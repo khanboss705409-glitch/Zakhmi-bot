@@ -17,7 +17,7 @@ module.exports.run = async function ({ api, event, args }) {
     const { threadID, messageID } = event;
 
     // ================= API CONFIG =================
-    const PRIYANSHU_API_KEY = "apim_8lEUfewp8dXI9KphqYrqhbaJLs6w9tQz_Q6MdYbIC2I";
+    const PRIYANSHU_API_KEY = "apim_IkDDMNA74aUimea49ApWZZm81TpjOg3dFYL2Xxi62qU";
 
     const apiUrl =
         "https://priyanshuapi.qzz.io/api/runner/youtube-downloader-v2/download";
